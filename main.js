@@ -84,16 +84,15 @@ function swapCurrencies() {
     convertCurrency();
 }
 
-// دالة لتحديث العملات عند تغيير fromCurrency
 async function updateCurrencies() {
     const baseCurrency = fromCurrencySelect.value;
     const data = await exchangeCurrency(baseCurrency);
-    populateCurrencySelect(toCurrencySelect, data, 'EGP'); // default to EGP
+    const currentToCurrency = toCurrencySelect.value;
+    populateCurrencySelect(toCurrencySelect, data, currentToCurrency || 'EGP');
     updateExchangeRate();
     convertCurrency();
 }
 
-// أحداث
 convertNowButton.addEventListener('click', convertCurrency);
 swapCurrenciesButton.addEventListener('click', swapCurrencies);
 fromCurrencySelect.addEventListener('change', updateCurrencies);
